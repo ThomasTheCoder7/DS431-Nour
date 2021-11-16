@@ -28,7 +28,7 @@ public class ListOperations {
                 for(int j = 0;j< l3.nElems-1;j++){
                     System.out.println(p);
                     if(equalNode(p,a))
-                    {l3.DeleteNext(p);}
+                    {}
                     p=p.next;
                 }
                 a=a.next;

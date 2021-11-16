@@ -9,6 +9,19 @@ import javax.swing.*;
 
 class MyLinkedList {
 
+
+    /********************************
+     * 1 - Go to the index    "DONE"*
+     * 2- shift the index     "DONE"*
+     * 3- insert the index    "DONE"*
+     * 4- Remove Duplicates   "DONE"*
+     * 5- Check Unique        "DONE"*
+     ********************************/
+
+
+
+
+
     Node first;
     int nElems;
 
@@ -19,11 +32,10 @@ class MyLinkedList {
         nElems++;
     }
 
-    public void DeleteNext(Node n){
-        try{
-        n.next = n.next.next;
-        }
-        catch (Exception e){}
+    public Node Delete(Node n){
+
+            if(n.next==null)return null;
+            else  { return n.next;}
     }
 
     public void addLast(int d) {
@@ -156,11 +168,24 @@ class MyLinkedList {
         }
         n.data=a.data;
     }
-    /********************************
-     * 1 - Go to the index    "DONE"*
-     * 2- shift the index     "DONE"*
-     * 3- insert the index    "DONE"*
-     ********************************/
+
+    public void RemoveDuplicate(){
+        Node n = first.next;
+        Node p = first;
+        while (n.next != null){
+            while (p!=null){
+                p=n.next;
+                if(n.data==p.data){
+                    p = n.next;
+                }
+                p=p.next;
+            }
+
+         n=n.next;
+        }
+    }
+
+
     public void insertAt(int index,Node a){
         Node n = first,p=n;
         for(int i = 0;i<index-1;i++) {

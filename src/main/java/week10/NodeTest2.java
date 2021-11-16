@@ -20,14 +20,10 @@ public class NodeTest2 {
         for (int i = 1; i < 5; i++) {
             mLL.addFirst(i);
         }
-        Node a = mLL.first;
-        MyLinkedList l2 = new MyLinkedList();
-        l2.addFirst(3);
-        l2.addFirst(9);
-        MyLinkedList l3=new MyLinkedList();
-
-        l3 = ListOperations.Union(mLL,l2);
-        l3.display();
+            mLL.addFirst(3);
+            mLL.addLast(4);
+        mLL.RemoveDuplicate();
+        mLL.display();
 
 
 
