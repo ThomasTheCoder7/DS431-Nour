@@ -20,11 +20,17 @@ public class NodeTest2 {
         for (int i = 1; i < 5; i++) {
             mLL.addFirst(i);
         }
-        MyLinkedList mll2 = new MyLinkedList();
-        mll2.addLast(5);
-        mll2.addFirst(10);
-        mll2.addFirst(5);
-        ListOperations.Union(mLL,mll2);
+        Node a = mLL.first;
+        MyLinkedList l2 = new MyLinkedList();
+        l2.addFirst(3);
+        l2.addFirst(9);
+        MyLinkedList l3=new MyLinkedList();
+
+        l3 = ListOperations.Union(mLL,l2);
+        l3.display();
+
+
+
 
     }
 

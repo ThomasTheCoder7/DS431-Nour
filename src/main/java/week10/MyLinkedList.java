@@ -5,6 +5,8 @@
  */
 package week10;
 
+import javax.swing.*;
+
 class MyLinkedList {
 
     Node first;
@@ -15,6 +17,13 @@ class MyLinkedList {
         newNode.next = first;
         first = newNode;
         nElems++;
+    }
+
+    public void DeleteNext(Node n){
+        try{
+        n.next = n.next.next;
+        }
+        catch (Exception e){}
     }
 
     public void addLast(int d) {
