@@ -20,11 +20,11 @@ public class NodeTest2 {
         for (int i = 1; i < 5; i++) {
             mLL.addFirst(i);
         }
-            mLL.addFirst(3);
-            mLL.addLast(4);
+        //Recursion
+       mLL.addLast(3);
+        mLL.addLast(3);
         mLL.RemoveDuplicate();
-        mLL.display();
-
+        mLL.displayRec();
 
 
 

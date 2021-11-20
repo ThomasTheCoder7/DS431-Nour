@@ -32,11 +32,7 @@ class MyLinkedList {
         nElems++;
     }
 
-    public Node Delete(Node n){
 
-            if(n.next==null)return null;
-            else  { return n.next;}
-    }
 
     public void addLast(int d) {
 
@@ -63,6 +59,27 @@ class MyLinkedList {
         }
     }
 
+    private void displayRec(Node n){
+        if(n==null){return;}
+        System.out.println(n);
+        displayRec(n.next);
+
+    }
+    public  void displayRec(){
+        displayRec(first);
+    }
+    private void displayRecRev(Node n){
+        if(n==null){
+            return;
+        }else
+        displayRecRev(n.next);
+        System.out.println(n);
+
+    }
+
+    public void displayRecRev(){
+        displayRecRev(first);
+    }
     public int sum() {
         int s = 0;
         Node p = first;
@@ -72,6 +89,19 @@ class MyLinkedList {
         }
         return s;
     }
+    private Node findRec(Node n,Node base){
+        if(n == null){return null;}
+        else if(base.data == n.data){return n;}
+        else return findRec(n.next,base);
+    }
+    public Node findRec(Node n){
+        return findRec(first,n);
+    }
+    public int sumRec(Node n){
+        if(n == null){return 0;}
+        return n.data+sumRec(n.next);
+    }
+
 
     public int max() {
         int m = first.data;
@@ -83,6 +113,19 @@ class MyLinkedList {
             p = p.next;
         }
         return m;
+    }
+
+    private int maxRec(Node n,int m){
+        if(n.next ==null){return m;}
+        if(n.data >= m){
+            n=n.next;
+            m=maxRec(n,m);
+        }
+        else n=n.next;
+        return maxRec(n,m);
+    }
+    public int maxRec(){
+        return maxRec(first, first.data);
     }
 
     public boolean find(int searchKey) {
@@ -170,20 +213,22 @@ class MyLinkedList {
     }
 
     public void RemoveDuplicate(){
-        Node n = first.next;
-        Node p = first;
+        Node n = first;
+        Node p = first.next;
         while (n.next != null){
-            while (p!=null){
-                p=n.next;
-                if(n.data==p.data){
-                    p = n.next;
+            p=n.next;
+            while (p.next!=null){
+                Node k = p.next;
+                if(n.equals(k)){
+                    p.next=k.next;
+                   nElems--;
                 }
                 p=p.next;
             }
-
          n=n.next;
+
         }
-    }
+    }//Remove Dup
 
 
     public void insertAt(int index,Node a){

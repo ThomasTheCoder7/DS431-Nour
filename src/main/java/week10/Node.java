@@ -14,4 +14,7 @@ class Node {
     public String toString() {
         return "Node " + data;
     }
+    public boolean equals(Node t){
+       return this.data == t.data;
+    }
 }
