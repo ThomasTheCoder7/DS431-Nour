@@ -21,9 +21,11 @@ public class NodeTest2 {
             mLL.addFirst(i);
         }
         //Recursion
-       mLL.addLast(3);
-        mLL.addLast(3);
-        mLL.RemoveDuplicate();
+        mLL.addFirst(8);
+        mLL.addFirst(8);
+        mLL.addFirst(8);
+        mLL.addFirst(8);
+        mLL.removeDuplicates();
         mLL.displayRec();
 
 

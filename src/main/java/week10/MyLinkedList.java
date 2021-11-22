@@ -212,21 +212,29 @@ class MyLinkedList {
         n.data=a.data;
     }
 
-    public void RemoveDuplicate(){
-        Node n = first;
-        Node p = first.next;
-        while (n.next != null){
-            p=n.next;
-            while (p.next!=null){
-                Node k = p.next;
-                if(n.equals(k)){
-                    p.next=k.next;
-                   nElems--;
-                }
-                p=p.next;
-            }
-         n=n.next;
+    public void RemoveD(Node n,Node k){
+    if(k.next == null){return; } //if this is true it means we went through all the linked list
+    if(n.next == null){n=k; k=k.next; }//if this is true n moved through the whole linked list and we reset it to k and moved k one position
+    if(n.data == n.next.data){Node t = n.next; n.next=t.next;}//if this is true it deletes adjacent duplicated elements i.e 2,2,4,3,5
+    if(n.data == k.data){k.next = n.next;}//if this is true it deletes duplicated elements
+    RemoveD(n.next,k);
+    }
 
+    public void removeDuplicates(){
+        Node n = first;
+        Node c =first;
+        Node prev_c;
+        while(n != null){
+            prev_c = c;
+            c = n.next;
+            while(c != null){
+                if(n.data == c.data){
+                    prev_c.next= c.next;
+                }
+                prev_c = c;
+                c = c.next;
+            }
+            n=n.next;
         }
     }//Remove Dup
 
