@@ -11,13 +11,13 @@ public class NodeTest {
         Node start = new Node(5);
         Node p = start;
         for (int i = 1; i < 4; i++) {
-            p.next = new Node(2 * i);
-            p = p.next;
+            p.setNext(new Node(2 * i));
+            p = p.getNext();
         }
         p = start;
         while (p != null) {
             System.out.println(p);
-            p = p.next;
+            p = p.getNext();
         } // while loop
     } // main
 } // class

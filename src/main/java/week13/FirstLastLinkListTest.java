@@ -18,7 +18,7 @@ public class FirstLastLinkListTest {
         fList.insert(20);
         fList.insert(3);
         fList.display();
-        fList.insert(2, new Node(10));
+        fList.insert(6, new Node(10));
         fList.display();
         fList.update(2, new Node(13));
         fList.display();

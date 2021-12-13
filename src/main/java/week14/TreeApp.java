@@ -13,12 +13,13 @@ class TreeApp
       theTree.insert(12);
       theTree.insert(37);
       theTree.insert(43);
-      theTree.insert(30);
+      /*theTree.insert(30);
       theTree.insert(33);
       theTree.insert(87);
       theTree.insert(93);
-      theTree.insert(97);
-
+      theTree.insert(97);*/
+      theTree.traverse(4);
+/*
       while(true)
          {
          System.out.print("Enter first letter of insert, find, delete,  traverse, exit \n");
@@ -70,7 +71,7 @@ class TreeApp
             default:
                System.out.print("Invalid entry\n");
             }  // end switch
-         }  // end while
+         } */ // end while
       }  // end main()
 // -------------------------------------------------------------
    }  // end class TreeApp

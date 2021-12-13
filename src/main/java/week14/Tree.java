@@ -174,9 +174,12 @@ class Tree{
       System.out.println();
       }
 // -------------------------------------------------------------
-   private void preOrder(TNode localRoot)
-      {
-      
+   private void preOrder(TNode localRoot) {
+      if(localRoot != null){
+      System.out.print(localRoot.iData+" ");
+      preOrder(localRoot.leftChild);
+      preOrder(localRoot.rightChild);
+      }
       }
 // -------------------------------------------------------------
    private void inOrder(TNode localRoot)
@@ -191,11 +194,40 @@ class Tree{
 // -------------------------------------------------------------
    private void postOrder(TNode localRoot)
       {
+         if(localRoot != null){
+            postOrder(localRoot.leftChild);
+            postOrder(localRoot.rightChild);
+            System.out.print(localRoot.iData+" ");
+         }
       }
 // -------------------------------------------------------------
-   private void levelOrder(TNode localRoot)
-      {
-      }
+   private void levelOrder(TNode localRoot) {
+            if(localRoot != null){
+               levelOrder(localRoot.leftChild );
+               levelOrder(localRoot.rightChild);
+               System.out.print(localRoot.iData+" ");
+               }
+         }
+
 
 // -------------------------------------------------------------
-   }  // end class Tree
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}  // end class Tree
