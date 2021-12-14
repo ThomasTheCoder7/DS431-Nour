@@ -160,14 +160,9 @@ class Tree{
       }
       return  localRoot;
       }
-
-
-
-      public TNode findRec(int key){
-      return findRec(key,root);
-      }
-
-
+   // -------------------------------------------------------------
+      public TNode findRec(int key){ return findRec(key,root); }
+   // -------------------------------------------------------------
 
 // -------------------------------------------------------------
    public void traverse(int traverseType)
@@ -218,16 +213,7 @@ class Tree{
       }
 // -------------------------------------------------------------
    public void levelOrder() {
-      int side = 0;
-      TNode localRoot = root;
-      TNode parent = root;
-      System.out.print(localRoot.getiData()+ " ");
-      while (localRoot.getLeftChild()!=null&&localRoot.getRightChild()!=null){
 
-      if(localRoot.getLeftChild()!=null) System.out.print(localRoot.getLeftChild().getiData());
-      if(localRoot.getRightChild()!=null) System.out.print(localRoot.getRightChild().getiData());
-      localRoot = localRoot.getLeftChild();
-      }
          }
 // -------------------------------------------------------------
    private int findMin(TNode n,int m){
