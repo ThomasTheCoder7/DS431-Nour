@@ -9,7 +9,7 @@ class Tree{
    public void insert(int id)
       {
       TNode newNode = new TNode();    // make new node
-      newNode.iData = id;           // insert data
+      newNode.setiData(id);           // insert data
       if(root==null)                // no node in root
          root = newNode;
       else                          // root occupied
@@ -19,21 +19,21 @@ class Tree{
          while(true)                // (exits internally)
             {
             parent = current;
-            if(id < current.iData)  // go left?
+            if(id < current.getiData())  // go left?
                {
-               current = current.leftChild;
+               current = current.getLeftChild();
                if(current == null)  // if end of the line,
                   {                 // insert on left
-                  parent.leftChild = newNode;
+                  parent.setLeftChild(newNode);
                   return;
                   }
                }  // end if go left
             else                    // or go right?
                {
-               current = current.rightChild;
+               current = current.getRightChild();
                if(current == null)  // if end of the line
                   {                 // insert on right
-                  parent.rightChild = newNode;
+                  parent.setRightChild(newNode);
                   return;
                   }
                }  // end else go right
@@ -47,18 +47,18 @@ class Tree{
       TNode parent = root;
       boolean isLeftChild = true;
 
-      while(current.iData != key)        // search for node
+      while(current.getiData() != key)        // search for node
          {
          parent = current;
-         if(key < current.iData)         // go left?
+         if(key < current.getiData())         // go left?
             {
             isLeftChild = true;
-            current = current.leftChild;
+            current = current.getLeftChild();
             }
          else                            // or go right?
             {
             isLeftChild = false;
-            current = current.rightChild;
+            current = current.getRightChild();
             }
          if(current == null)             // end of the line,
             return false;                // didn't find it
@@ -66,34 +66,33 @@ class Tree{
       // found node to delete
 
       // if no children, simply delete it
-      if(current.leftChild==null &&
-                                   current.rightChild==null)
+      if(current.getLeftChild()==null && current.getRightChild()==null)
          {
          if(current == root)             // if root,
             root = null;                 // tree is empty
          else if(isLeftChild)
-            parent.leftChild = null;     // disconnect
+            parent.setLeftChild(null);     // disconnect
          else                            // from parent
-            parent.rightChild = null;
+            parent.setRightChild(null);
          }
 
       // if no right child, replace with left subtree
-      else if(current.rightChild==null)
+      else if(current.getRightChild()==null)
          if(current == root)
-            root = current.leftChild;
+            root = current.getLeftChild();
          else if(isLeftChild)
-            parent.leftChild = current.leftChild;
+            parent.setLeftChild(current.getLeftChild());
          else
-            parent.rightChild = current.leftChild;
+            parent.setRightChild(current.getLeftChild());
 
       // if no left child, replace with right subtree
-      else if(current.leftChild==null)
+      else if(current.getLeftChild()==null)
          if(current == root)
-            root = current.rightChild;
+            root = current.getRightChild();
          else if(isLeftChild)
-            parent.leftChild = current.rightChild;
+            parent.setLeftChild(current.getRightChild());
          else
-            parent.rightChild = current.rightChild;
+            parent.setRightChild(current.getRightChild());
 
       else  // two children, so replace with inorder successor
          {
@@ -104,12 +103,12 @@ class Tree{
          if(current == root)
             root = successor;
          else if(isLeftChild)
-            parent.leftChild = successor;
+            parent.setLeftChild(successor);
          else
-            parent.rightChild = successor;
+            parent.setRightChild(successor);
 
          // connect successor to current's left child
-         successor.leftChild = current.leftChild;
+         successor.setLeftChild(current.getLeftChild());
          }  // end else two children
       // (successor cannot have a left child)
       return true;                                // success
@@ -122,18 +121,18 @@ class Tree{
       {
       TNode successorParent = delNode;
       TNode successor = delNode;
-      TNode current = delNode.rightChild;   // go to right child
+      TNode current = delNode.getRightChild();   // go to right child
       while(current != null)               // until no more
          {                                 // left children,
          successorParent = successor;
          successor = current;
-         current = current.leftChild;      // go to left child
+         current = current.getLeftChild();      // go to left child
          }
                                            // if successor not
-      if(successor != delNode.rightChild)  // right child,
+      if(successor != delNode.getRightChild())  // right child,
          {                                 // make connections
-         successorParent.leftChild = successor.rightChild;
-         successor.rightChild = delNode.rightChild;
+         successorParent.setLeftChild(successor.getRightChild());
+         successor.setRightChild(delNode.getRightChild());
          }
       return successor;
       }
@@ -143,15 +142,32 @@ class Tree{
       TNode current = root;               // start at root
       while(current != null)        // while no match,
          {
-        if(current.iData == key)             // if no child,
-            return current;                 // didn't find it
-         if(key < current.iData)         // go left?
-            current = current.leftChild;
+        if(current.getiData() == key)             // if no child,
+            return current;               // found it
+         if(key < current.getiData())         // go left?
+            current = current.getLeftChild();
          else                            // or go right?
-            current = current.rightChild;
+            current = current.getRightChild();
          }
-      return null;                    // found it
+      return null;         // didn't find it
       }  // end find()
+
+      private TNode findRec(int key,TNode localRoot){
+      if(localRoot!=null){
+         if(localRoot.getiData()==key){return localRoot;}
+         if(localRoot.getiData()<key){ return findRec(key,localRoot.getRightChild());}
+         if(localRoot.getiData()>key){return findRec(key,localRoot.getLeftChild());}
+      }
+      return  localRoot;
+      }
+
+
+
+      public TNode findRec(int key){
+      return findRec(key,root);
+      }
+
+
 
 // -------------------------------------------------------------
    public void traverse(int traverseType)
@@ -168,7 +184,7 @@ class Tree{
                  postOrder(root);
                  break;
          case 4: System.out.print("\nLevelorder traversal: ");
-                 levelOrder(root);
+                 levelOrder();
                  break;
          }
       System.out.println();
@@ -176,9 +192,9 @@ class Tree{
 // -------------------------------------------------------------
    private void preOrder(TNode localRoot) {
       if(localRoot != null){
-      System.out.print(localRoot.iData+" ");
-      preOrder(localRoot.leftChild);
-      preOrder(localRoot.rightChild);
+      System.out.print(localRoot.getiData()+" ");
+      preOrder(localRoot.getLeftChild());
+      preOrder(localRoot.getRightChild());
       }
       }
 // -------------------------------------------------------------
@@ -186,30 +202,67 @@ class Tree{
       {
       if(localRoot != null)
          {
-         inOrder(localRoot.leftChild);
-         System.out.print(localRoot.iData + " ");
-         inOrder(localRoot.rightChild);
+         inOrder(localRoot.getLeftChild());
+         System.out.print(localRoot.getiData() + " ");
+         inOrder(localRoot.getRightChild());
          }
       }
 // -------------------------------------------------------------
    private void postOrder(TNode localRoot)
       {
          if(localRoot != null){
-            postOrder(localRoot.leftChild);
-            postOrder(localRoot.rightChild);
-            System.out.print(localRoot.iData+" ");
+            postOrder(localRoot.getLeftChild());
+            postOrder(localRoot.getRightChild());
+            System.out.print(localRoot.getiData()+" ");
          }
       }
 // -------------------------------------------------------------
-   private void levelOrder(TNode localRoot) {
-            if(localRoot != null){
-               levelOrder(localRoot.leftChild );
-               levelOrder(localRoot.rightChild);
-               System.out.print(localRoot.iData+" ");
-               }
+   public void levelOrder() {
+      int side = 0;
+      TNode localRoot = root;
+      TNode parent = root;
+      System.out.print(localRoot.getiData()+ " ");
+      while (localRoot.getLeftChild()!=null&&localRoot.getRightChild()!=null){
+
+      if(localRoot.getLeftChild()!=null) System.out.print(localRoot.getLeftChild().getiData());
+      if(localRoot.getRightChild()!=null) System.out.print(localRoot.getRightChild().getiData());
+      localRoot = localRoot.getLeftChild();
+      }
          }
+// -------------------------------------------------------------
+   private int findMin(TNode n,int m){
+      if(n.getLeftChild() == null){ return m;}
+      return findMin(n.getLeftChild(),n.getLeftChild().getiData());
+   }
 
+   public int findMin(){
+      return findMin(root,0);
 
+   }
+// -------------------------------------------------------------
+public int findMinIter(){
+      TNode n = root;
+      while(n.getLeftChild() != null){
+         n=n.getLeftChild();
+      }
+      return n.getiData();
+}
+// -------------------------------------------------------------
+private int findMax(TNode n,int m){
+      if(n.getRightChild()==null)return m;
+      else return findMax(n.getRightChild(),n.getRightChild().getiData());
+}
+public int findMax(){
+      return findMax(root,0);
+}
+// -------------------------------------------------------------
+public int findMaxIter(){
+   TNode n = root;
+   while(n.getRightChild() != null){
+      n=n.getRightChild();
+   }
+   return n.getiData();
+}
 // -------------------------------------------------------------
 
 

@@ -18,7 +18,7 @@ class TreeApp
       theTree.insert(87);
       theTree.insert(93);
       theTree.insert(97);*/
-      theTree.traverse(4);
+      theTree.findRec(75).displayNode();
 /*
       while(true)
          {
