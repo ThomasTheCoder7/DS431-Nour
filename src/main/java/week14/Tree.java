@@ -1,4 +1,12 @@
 package week14;
+
+import week08.QueueApp;
+import week08.QueueArrayG;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 class Tree{
    private TNode root;             // first node of tree
 
@@ -192,6 +200,23 @@ class Tree{
       preOrder(localRoot.getRightChild());
       }
       }
+
+   public void preOrder(){
+      preOrder(root);
+   }
+
+
+   public void preOrderIter(){
+      TNode localRoot = root;
+      Stack<TNode>s=new Stack<>();
+      s.push(root);
+      while (!s.empty()){
+         localRoot=s.pop();
+         System.out.print(localRoot.getiData()+" ");
+         if(localRoot.getRightChild()!=null){s.push(localRoot.getRightChild());}
+         if(localRoot.getLeftChild()!=null){s.push(localRoot.getLeftChild());}
+      }
+   }
 // -------------------------------------------------------------
    private void inOrder(TNode localRoot)
       {
@@ -202,6 +227,27 @@ class Tree{
          inOrder(localRoot.getRightChild());
          }
       }
+
+   public void inOrder(){
+      inOrder(root);
+   }
+
+
+      public void inOrderIter(){
+      TNode localRoot = root;
+      TNode right = root;
+      Stack<TNode>s = new<TNode> Stack();
+      while(localRoot!=null||!s.empty()){
+         if(localRoot!=null){
+         s.push(localRoot);
+         localRoot=localRoot.getLeftChild();}
+         else{
+         localRoot=s.pop();
+         System.out.print(localRoot.getiData()+" ");
+         localRoot=localRoot.getRightChild();}
+      }
+
+      }
 // -------------------------------------------------------------
    private void postOrder(TNode localRoot)
       {
@@ -211,9 +257,49 @@ class Tree{
             System.out.print(localRoot.getiData()+" ");
          }
       }
+
+  public void postOrder(){
+      postOrder(root);
+  }
+
+
+
+
+  public void postOrderIter(){
+      TNode localRoot = root,before=null;
+      Stack<TNode>s=new Stack<TNode>();
+     LinkedList<TNode>linkedList = new LinkedList<>();
+      while(localRoot!=null||!s.empty()){
+         if(localRoot!=null) {
+            s.push(localRoot);
+            localRoot=localRoot.getLeftChild();//go last left
+         } else{
+            localRoot=s.peek(); // get top
+            if(localRoot.getRightChild()==null|| localRoot.getRightChild()==before){
+               linkedList.add(localRoot);
+               s.pop();
+               before=localRoot;
+               localRoot=null;
+            }else
+               localRoot=localRoot.getRightChild();
+         }
+      }
+
+      while(!linkedList.isEmpty()){
+         System.out.print(linkedList.removeFirst().getiData()+" ");
+      }
+      }
+
 // -------------------------------------------------------------
    public void levelOrder() {
-
+      TNode localRoot = root;
+      QueueArrayG<TNode>q = new QueueArrayG<>(TNode.class,50);
+      while (localRoot!=null){
+         System.out.print(localRoot.getiData()+" ");
+         if(localRoot.getLeftChild()!=null){q.enqueue(localRoot.getLeftChild());}
+         if(localRoot.getRightChild()!=null){q.enqueue(localRoot.getRightChild());}
+         localRoot= q.dequeue();
+      }
          }
 // -------------------------------------------------------------
    private int findMin(TNode n,int m){
