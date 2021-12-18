@@ -5,8 +5,6 @@
  */
 package week10;
 
-import week12.LinkedList;
-
 /**
  *
  * @author mk_no
@@ -18,22 +16,17 @@ public class NodeTest2 {
      */
     public static void main(String[] args) {
         System.out.println("List by Add First");
-        LinkList mLL = new LinkList();
+        MyLinkedList mLL = new MyLinkedList();
         for (int i = 1; i < 5; i++) {
-            mLL.addLast(i);
+            mLL.addFirst(i);
         }
         //Recursion
-        FirstLastLinkList ff = new FirstLastLinkList();
-        ff.insert(0,3);
-        ff.insert(1,2);
-        ff.insert(2,4);
-        ff.insert(0,6);
-        ff.insert(3,99);
-        ff.insert(5,23);
-        ff.insert(100,3);
-        ff.display();
-
-        System.out.println("LAST ---> "+ff.last);
+        mLL.addFirst(8);
+        mLL.addFirst(8);
+        mLL.addFirst(8);
+        mLL.addFirst(8);
+        mLL.removeDuplicates();
+        mLL.displayRec();
 
 
 
